@@ -7,6 +7,7 @@
             <class name="com.automationexercise.tests.ui.UserLoginInvalidCredentialsTest"/>
             <class name="com.automationexercise.tests.ui.UserLogoutTest"/>
             <class name="com.automationexercise.tests.ui.RegisterWithExistingEmailTest"/>
+            <class name="com.automationexercise.tests.ui.ContactUsFormTest"/>
         </classes>
     </test>
 </suite>
