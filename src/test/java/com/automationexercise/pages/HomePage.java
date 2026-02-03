@@ -21,6 +21,9 @@ public class HomePage {
     private By signupLoginButton3 = By.xpath("//a[contains(text(), 'Signup')]");
     private By contactUsButton = By.xpath("//a[contains(normalize-space(), 'Contact us') or contains(normalize-space(), 'Contact Us') or @href='/contact_us']");
 
+    private By testCasesButton =
+            By.xpath("//a[@href='/test_cases' or contains(normalize-space(),'Test Cases')]");
+
     public void clickSignupLoginButton() {
         try {
             System.out.println("Trying selector 1: //a[@href='/login']");
@@ -48,5 +51,9 @@ public class HomePage {
 
     public void clickContactUsButton() {
         wait.until(ExpectedConditions.elementToBeClickable(contactUsButton)).click();
+    }
+
+    public void clickTestCasesButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(testCasesButton)).click();
     }
 }
