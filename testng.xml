@@ -10,7 +10,7 @@
             <class name="com.automationexercise.tests.ui.ContactUsFormTest"/>
             <class name="com.automationexercise.tests.ui.VerifyTestCasesPageTest"/>
             <class name="com.automationexercise.tests.ui.VerifyAllProductsAndProductDetailTest"/>
-
+            <class name="com.automationexercise.tests.ui.SearchProductTest"/>
         </classes>
     </test>
 </suite>
