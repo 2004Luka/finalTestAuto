@@ -11,6 +11,7 @@
             <class name="com.automationexercise.tests.ui.VerifyTestCasesPageTest"/>
             <class name="com.automationexercise.tests.ui.VerifyAllProductsAndProductDetailTest"/>
             <class name="com.automationexercise.tests.ui.SearchProductTest"/>
+            <class name="com.automationexercise.tests.ui.AddProductsToCartTest"/>
         </classes>
     </test>
 </suite>

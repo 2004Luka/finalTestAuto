@@ -41,7 +41,17 @@ public class LoginPage {
             By.xpath("//a[@href='/test_cases' or contains(normalize-space(),'Test Cases')]");
     private By productsButton =
             By.xpath("//a[@href='/products' or contains(normalize-space(),'Products')]");
+    private boolean isLoggedInAsVisibleNow() {
+        return !driver.findElements(loggedInAsText).isEmpty();
+    }
 
+    private boolean isLoginToYourAccountVisibleNow() {
+        return !driver.findElements(loginToYourAccountText).isEmpty();
+    }
+
+    private boolean isIncorrectCredentialsErrorVisibleNow() {
+        return !driver.findElements(incorrectCredentialsError).isEmpty();
+    }
     public void clickLoginButtonExpectingIncorrectCredentialsError() {
         wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(incorrectCredentialsError));
@@ -70,7 +80,13 @@ public class LoginPage {
 
     public void clickLoginButton() {
         wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
-        wait.until(d -> isLoggedInAsVisible() || isLoginToYourAccountVisible() || isIncorrectCredentialsErrorVisible());
+
+        wait.until(d ->
+                isLoggedInAsVisibleNow()
+                        || isIncorrectCredentialsErrorVisibleNow()
+                        || d.getCurrentUrl().contains("/login")
+                        || isLoginToYourAccountVisibleNow()
+        );
     }
 
     public boolean isLoggedInAsVisible() {
