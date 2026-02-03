@@ -9,7 +9,7 @@
             <class name="com.automationexercise.tests.ui.RegisterWithExistingEmailTest"/>
             <class name="com.automationexercise.tests.ui.ContactUsFormTest"/>
             <class name="com.automationexercise.tests.ui.VerifyTestCasesPageTest"/>
-
+            <class name="com.automationexercise.tests.ui.VerifyAllProductsAndProductDetailTest"/>
 
         </classes>
     </test>

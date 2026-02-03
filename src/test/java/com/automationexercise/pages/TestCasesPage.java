@@ -11,6 +11,8 @@ public class TestCasesPage {
 
     private final WebDriver driver;
     private final WebDriverWait wait;
+    private final By testCasesHeaderAlt =
+            By.xpath("//*[contains(translate(normalize-space(), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 'TEST CASES')]");
 
     public TestCasesPage(WebDriver driver) {
         this.driver = driver;
@@ -24,10 +26,12 @@ public class TestCasesPage {
         try {
             wait.until(ExpectedConditions.or(
                     ExpectedConditions.urlContains("test_cases"),
-                    ExpectedConditions.visibilityOfElementLocated(testCasesHeader)
+                    ExpectedConditions.visibilityOfElementLocated(testCasesHeader),
+                    ExpectedConditions.visibilityOfElementLocated(testCasesHeaderAlt)
             ));
             return driver.getCurrentUrl().contains("test_cases")
-                    || !driver.findElements(testCasesHeader).isEmpty();
+                    || !driver.findElements(testCasesHeader).isEmpty()
+                    || !driver.findElements(testCasesHeaderAlt).isEmpty();
         } catch (Exception e) {
             return false;
         }

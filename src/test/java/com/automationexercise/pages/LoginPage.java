@@ -35,6 +35,12 @@ public class LoginPage {
     private final By accountDeletedMessageAlt =
             By.xpath("//*[self::h1 or self::h2 or self::h3 or self::b or self::p or self::div]" +
                     "[contains(translate(normalize-space(), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 'ACCOUNT DELETED')]");
+    private By testCasesButtonAlt = By.cssSelector("a[href*='test_cases']");
+    private By productsButtonAlt = By.cssSelector("a[href*='products']");
+    private By testCasesButton =
+            By.xpath("//a[@href='/test_cases' or contains(normalize-space(),'Test Cases')]");
+    private By productsButton =
+            By.xpath("//a[@href='/products' or contains(normalize-space(),'Products')]");
 
     public void clickLoginButtonExpectingIncorrectCredentialsError() {
         wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
@@ -111,6 +117,34 @@ public class LoginPage {
             } catch (Exception ignored) {
                 System.out.println("After delete, URL is: " + driver.getCurrentUrl());
                 return false;
+            }
+        }
+    }
+    private void jsClick(By locator) {
+        var element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+    }
+
+    public void clickTestCasesButton() {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(testCasesButton)).click();
+        } catch (Exception e) {
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(testCasesButtonAlt)).click();
+            } catch (Exception e2) {
+                jsClick(testCasesButton);
+            }
+        }
+    }
+
+    public void clickProductsButton() {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(productsButton)).click();
+        } catch (Exception e) {
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(productsButtonAlt)).click();
+            } catch (Exception e2) {
+                jsClick(productsButton);
             }
         }
     }

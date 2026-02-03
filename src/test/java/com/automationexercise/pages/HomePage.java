@@ -23,6 +23,8 @@ public class HomePage {
 
     private By testCasesButton =
             By.xpath("//a[@href='/test_cases' or contains(normalize-space(),'Test Cases')]");
+    private By productsButton =
+            By.xpath("//a[@href='/products' or contains(normalize-space(),'Products')]");
 
     public void clickSignupLoginButton() {
         try {
@@ -55,5 +57,9 @@ public class HomePage {
 
     public void clickTestCasesButton() {
         wait.until(ExpectedConditions.elementToBeClickable(testCasesButton)).click();
+    }
+
+    public void clickProductsButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(productsButton)).click();
     }
 }
