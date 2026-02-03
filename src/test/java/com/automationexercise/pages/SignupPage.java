@@ -12,15 +12,15 @@ public class SignupPage {
         this.driver = driver;
     }
 
-    // Elements on signup page
     private By nameField = By.xpath("//input[@data-qa='signup-name']");
     private By emailField = By.xpath("//input[@data-qa='signup-email']");
     private By signupButton = By.xpath("//button[@data-qa='signup-button']");
 
-    // Verify 'New User Signup!' is visible
     private By newUserSignupText = By.xpath("//h2[contains(text(), 'New User Signup')]");
 
-    // Methods
+    private By emailAlreadyExistsError =
+            By.xpath("//*[self::p or self::div][contains(normalize-space(), 'Email Address already exist!')]");
+
     public void enterName(String name) {
         driver.findElement(nameField).sendKeys(name);
     }
@@ -35,5 +35,13 @@ public class SignupPage {
 
     public boolean isNewUserSignupVisible() {
         return driver.findElement(newUserSignupText).isDisplayed();
+    }
+
+    public boolean isEmailAlreadyExistsErrorVisible() {
+        try {
+            return driver.findElement(emailAlreadyExistsError).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

@@ -32,6 +32,9 @@ public class LoginPage {
 
     private final By incorrectCredentialsError =
             By.xpath("//p[contains(normalize-space(), 'Your email or password is incorrect!')]");
+    private final By accountDeletedMessageAlt =
+            By.xpath("//*[self::h1 or self::h2 or self::h3 or self::b or self::p or self::div]" +
+                    "[contains(translate(normalize-space(), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 'ACCOUNT DELETED')]");
 
     public void clickLoginButtonExpectingIncorrectCredentialsError() {
         wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
@@ -101,8 +104,14 @@ public class LoginPage {
             wait.until(ExpectedConditions.visibilityOfElementLocated(accountDeletedMessage));
             return true;
         } catch (Exception e) {
-            System.out.println("After delete, URL is: " + driver.getCurrentUrl());
-            return false;
+            try {
+                new WebDriverWait(driver, Duration.ofSeconds(25))
+                        .until(ExpectedConditions.visibilityOfElementLocated(accountDeletedMessageAlt));
+                return true;
+            } catch (Exception ignored) {
+                System.out.println("After delete, URL is: " + driver.getCurrentUrl());
+                return false;
+            }
         }
     }
 }
