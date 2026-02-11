@@ -1,5 +1,6 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="AutomationExercise Suite" verbose="1">
+<suite name="AutomationExercise Suite" verbose="1" parallel="tests" thread-count="2">
+    
     <test name="UI Tests">
         <classes>
             <class name="com.automationexercise.tests.ui.UserRegistrationTest"/>
@@ -12,6 +13,14 @@
             <class name="com.automationexercise.tests.ui.VerifyAllProductsAndProductDetailTest"/>
             <class name="com.automationexercise.tests.ui.SearchProductTest"/>
             <class name="com.automationexercise.tests.ui.AddProductsToCartTest"/>
+        </classes>
+    </test>
+
+    <test name="API Tests">
+        <classes>
+            <class name="com.automationexercise.tests.api.ProductsApiTest"/>
+            <class name="com.automationexercise.tests.api.BrandsApiTest"/>
+            <class name="com.automationexercise.tests.api.UserAccountApiTest"/>
         </classes>
     </test>
 </suite>
