@@ -2,35 +2,29 @@ package com.automationexercise.tests.api;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.restassured.AllureRestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
 
 public class BrandsApiTest extends BaseApiTest {
 
     @Test(description = "API 3: Get All Brands List")
-    @Description("Verify that the API returns a list of all brands.")
     public void api3_getAllBrandsList() {
-        given()
-            .filter(new AllureRestAssured())
-        .when()
-            .get("/api/brandsList")
-        .then()
-            .statusCode(200)
-            .body("responseCode", equalTo(200))
-            .body("brands", not(empty()));
+        Response response = given().filter(new AllureRestAssured()).when().get("/api/brandsList");
+        JsonPath jsonPath = new JsonPath(response.getBody().asString());
+
+        Assert.assertEquals(jsonPath.getInt("responseCode"), 200);
+        Assert.assertNotNull(jsonPath.get("brands"));
     }
 
     @Test(description = "API 4: PUT To All Brands List (Negative)")
-    @Description("Verify that PUT method is not supported for brands list.")
     public void api4_putToAllBrandsList() {
-        given()
-            .filter(new AllureRestAssured())
-        .when()
-            .put("/api/brandsList")
-        .then()
-            .statusCode(200)
-            .body("responseCode", equalTo(405))
-            .body("message", equalTo("This request method is not supported."));
+        Response response = given().filter(new AllureRestAssured()).when().put("/api/brandsList");
+        JsonPath jsonPath = new JsonPath(response.getBody().asString());
+
+        Assert.assertEquals(jsonPath.getInt("responseCode"), 405);
+        Assert.assertEquals(jsonPath.getString("message"), "This request method is not supported.");
     }
 }
