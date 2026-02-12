@@ -29,7 +29,6 @@ public class ProductsApiTest extends BaseApiTest {
     public void api5_postToSearchProduct() {
         Response response = given()
                 .filter(new AllureRestAssured())
-                // Use multiPart to avoid "byte stream" encoding errors
                 .multiPart("search_product", "tshirt")
                 .when()
                 .post("/api/searchProduct");

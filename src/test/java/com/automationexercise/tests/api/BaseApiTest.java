@@ -13,7 +13,6 @@ public class BaseApiTest {
     @BeforeClass
     public void setup() {
         loadProperties();
-        // Uses the same config file but looks for api.base.url
         RestAssured.baseURI = properties.getProperty("api.base.url", "https://automationexercise.com");
     }
 

@@ -76,7 +76,6 @@ public class BaseTest {
             driver = new FirefoxDriver(options);
         }
 
-        // IMPORTANT: avoid mixing implicit wait with explicit waits (it causes long hangs)
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
         driver.manage().timeouts().pageLoadTimeout(
@@ -95,7 +94,6 @@ public class BaseTest {
     }
 
     protected void closePopups() {
-        // Using findElements() so it returns immediately (no implicit-wait delays)
         clickIfPresent(By.xpath("//button[contains(., 'No thanks')]"));
         clickIfPresent(By.xpath("//button[contains(., 'Close')]"));
         clickIfPresent(By.xpath("//button[@aria-label='Close']"));

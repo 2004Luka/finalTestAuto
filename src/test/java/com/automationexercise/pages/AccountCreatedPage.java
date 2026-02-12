@@ -16,14 +16,12 @@ public class AccountCreatedPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    // Elements - Using multiple strategies for better robustness
     private By accountCreatedMessage = By.xpath("//*[contains(text(), 'ACCOUNT CREATED')]");
     private By continueButton = By.xpath("//a[contains(@href, '/')][@class='btn btn-primary']");
     private By loggedInAsText = By.xpath("//a[contains(text(), 'Logged in as')]");
     private By deleteAccountButton = By.xpath("//a[contains(@href, 'delete_account')]");
     private By accountDeletedMessage = By.xpath("//*[contains(text(), 'ACCOUNT DELETED')]");
 
-    // Helper method to close ANY popup
     private void closeAnyPopup() {
         try {
             By noThanksButton = By.xpath("//button[contains(text(), 'No thanks')]");
@@ -31,14 +29,11 @@ public class AccountCreatedPage {
             System.out.println("Closed popup");
             Thread.sleep(500);
         } catch (Exception e) {
-            // Popup might not exist, that's ok
         }
     }
 
-    // Methods with wait and error handling
     public boolean isAccountCreatedMessageVisible() {
         try {
-            // Close any popups that might be blocking
             closeAnyPopup();
             closeAnyPopup();
             closeAnyPopup();
@@ -58,7 +53,6 @@ public class AccountCreatedPage {
             wait.until(ExpectedConditions.elementToBeClickable(continueButton)).click();
         } catch (Exception e) {
             System.out.println("Continue button not found, trying alternative...");
-            // Alternative: Click by any button with text "Continue"
             driver.findElement(By.xpath("//a[@class='btn btn-primary']")).click();
         }
     }
@@ -78,7 +72,6 @@ public class AccountCreatedPage {
             wait.until(ExpectedConditions.elementToBeClickable(deleteAccountButton)).click();
         } catch (Exception e) {
             System.out.println("Delete button not found: " + e.getMessage());
-            // Try alternative selector
             driver.findElement(By.xpath("//a[contains(text(), 'Delete Account')]")).click();
         }
     }
